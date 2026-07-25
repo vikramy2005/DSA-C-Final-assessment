@@ -1,9 +1,5 @@
-## C1 Defect Report
-| No | Line | Defect | Consequence |
-|---|---|---|---|
-| 1 | 4 | `prev` is an uninitialized pointer when assigned to `curr->next`. | Causes immediate undefined behavior or stack corruption on the first iteration. |
-| 2 | 6 | Loop terminates early (`curr->next != NULL`), skipping the final (tail) node. | The last element is omitted, preventing full list reversal. |
-| 3 | 12 | Returns `head` (the original head) instead of `prev` (the new head). | Returns a single isolated node pointing to `NULL` instead of the reversed list. |
-
-Corrected function: SectionC/C1_reverse.c
-Complexity: Time O(n), Space O(1)
+## C2 Optimisation Report
+- **Current Time Complexity:** $O(n^2)$ due to nested linear loops scanning every subarray start position. At $n = 1,000,000$, $10^{12}$ operations occur, triggering a TLE (Time Limit Exceeded).
+- **Corrected Time Complexity:** $O(n)$ sliding window approach.
+- **Corrected Space Complexity:** $O(1)$ auxiliary space.
+- **Condition on Input:** All elements in the array $a$ must be non-negative ($a[i] \ge 0$), making the prefix sums monotonic and allowing the sliding window's left boundary to only move forward.
